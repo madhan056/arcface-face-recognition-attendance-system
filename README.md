@@ -1,26 +1,105 @@
+# ArcFace Face Recognition Attendance System
+
 ## Project Overview
-This project is a real-time attendance management system that leverages facial recognition for accurate and contactless attendance marking. Built using the ArcFace model from the InsightFace library, it detects and verifies faces from live camera feed and stores attendance logs into a MySQL database.
 
-## Installation Requirements
-Before installing Python dependencies, make sure you have the required system tools installed.  
-Run this command in PowerShell: winget install -e --id Microsoft.VisualStudio.2022.BuildTools  
-Load buffalo_l model in .insightface Folder (Create a New Folder named "Model" inside .insightface folder and move the arcface model into it)
+This project is a **real-time attendance management system** that uses
+**facial recognition technology** to automatically record attendance.\
+The system detects and verifies faces using the **ArcFace deep learning
+model** from the **InsightFace library** and records attendance in a
+**MySQL database**.
 
-## Imported Modules, Tools and Their Roles
-FILE HANDLING AND UTILITIES  
-os -  File Handling.  
-pickle - Saving and loading the facial embeddings stored in the database dictionary (Common Purpose - Saving and Loading Python objects like dictionaries and NumPy arrays.)  
-logging as log - tracking errors, warnings, and messages during execution.  
+The application captures images from a **live camera feed**, compares
+detected faces with **stored facial embeddings**, and marks attendance
+when a match is found.\
+This provides a **contactless and automated attendance solution** that
+improves **accuracy and efficiency**.
 
-IMAGE PROCESSING  
-cv2 - Loading, processing, and manipulating images.  
-numpy - Helps with numerical operations on arrays and images.  
+# Technologies Used
 
-FACE RECOGNITION AND ANALYSIS  
-insightface - Provides pre-trained deep learning models for face detection and recognition.  
-FaceAnalysis - Insightface package -> App Submodule -> FaceAnalysis Class, encapsulate face analysis operations like detection, recognition, feature extraction, etc,  
-cosine - Calculating similarity for face recognition.(from scipy.spatial.distance)  
+## Programming & Libraries
+-   **Python**
+-   **OpenCV (cv2)**
+-   **NumPy**
+-   **InsightFace**
+-   **Face Recognition**
 
-DATABASE AND TIME  
-mysql.connector - connect and interact with a MySQL database  
-import datetime - handling date and time  
+## Model
+-   **ArcFace Model**
+-   **InsightFace FaceAnalysis**
+
+## Database
+-   **MySQL**
+
+## Utilities
+-   **Pickle**
+-   **Logging**
+
+# Installation & Setup
+
+## 1. Clone the Repository
+
+``` bash
+git clone https://github.com/madhan056/arcface-face-recognition-attendance-system.git
+cd arcface-face-recognition-attendance-system
+```
+
+## 2. System Requirements
+
+Before installing Python dependencies, install **Visual Studio Build
+Tools**.
+
+Run the following command in **PowerShell**:
+
+``` powershell
+winget install -e --id Microsoft.VisualStudio.2022.BuildTools
+```
+
+## 3. Model Setup
+
+Navigate to the InsightFace directory:  .insightface/
+
+Create a folder named:  model
+
+Download the **ArcFace buffalo_l model** and move it into the **model**
+folder.
+
+## 4. Install Python Dependencies
+
+Navigate to the project directory and install required libraries:
+
+``` bash
+pip install -r requirements.txt
+```
+
+# Running the Application
+
+Run the main program:
+
+``` bash
+python main.py
+```
+
+The system will:
+-   Open the **camera feed**
+-   Detect faces in **real-time**
+-   Compare **facial embeddings**
+-   Mark **attendance automatically**
+-   Store **attendance records in the MySQL database**
+
+# Modules Used
+
+## File Handling
+-   `os` -- File and directory operations\
+-   `pickle` -- Saving and loading facial embeddings
+
+## Image Processing
+-   `cv2` -- Image capture and processing\
+-   `numpy` -- Numerical operations for image data
+
+## Face Recognition
+-   `insightface` -- Deep learning face recognition library\
+-   `FaceAnalysis` -- Face detection and feature extraction
+
+## Database & Time
+-   `mysql.connector` -- Connect and interact with MySQL database\
+-   `datetime` -- Handle attendance timestamps
