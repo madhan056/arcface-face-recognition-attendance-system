@@ -33,14 +33,7 @@ if os.path.exists("face_db.pkl"):
 
 #ADD IMAGES TO DATABASE
 image_list = [
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/abdul.png", "ABDUL"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/esakki.png", "ESAKKI"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/madhan.png", "MADHAN"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/senthil.png", "SENTHIL"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/tanasaker.png", "DHANSEKAR"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/vishnu.png", "VISHNU"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/genesis.png", "GENESIS SIR"),
-    ("C:/Users/mrmad/OneDrive/Documents/L I B S/A R C F A C E/DB/sathish.png", "SATHISH")
+    ("C:\\Users\\mrmad\\Downloads\\profile.jpg", "MADHAN")
 ]
 for img_path, person_name in image_list: 
     img = cv2.imread(img_path)
@@ -66,14 +59,38 @@ print("All face embeddings stored successfully!")
 
 #CONNECT TO MYSQL DATABASE
 def connect_to_database():
-    connection = mysql.connector.connect(
-        host="localhost", 
-        user="root",       
-        password="12345",      
-        database="register",
-        auth_plugin="mysql_native_password"
-    )
-    return connection
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="12345",
+            auth_plugin="mysql_native_password"
+        )
+
+        cursor = connection.cursor()
+
+        # Create database if not exists
+        cursor.execute("CREATE DATABASE IF NOT EXISTS register")
+
+        # Select the database
+        cursor.execute("USE register")
+
+        # Create table if not exists
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS attendance (
+            PERSON_NAME VARCHAR(100),
+            ATTENDANCE_DATE DATE,
+            ATTENDANCE_TIME TIME
+        )
+        """)
+
+        connection.commit()
+
+        return connection
+
+    except mysql.connector.Error as err:
+        print(f"Database connection error: {err}")
+        return None
 
 
 #LOG ATTENDANCE IN DATABASE
